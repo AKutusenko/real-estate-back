@@ -8,10 +8,6 @@ export class UserController {
 
   @Post('/signup')
   async signUp(@Body() data: UserDto) {
-    try {
-      await this.userService.signUp(data);
-    } catch (error) {
-      throw error;
-    }
+    return this.userService.signUp(data);
   }
 }

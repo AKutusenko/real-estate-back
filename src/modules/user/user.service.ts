@@ -24,7 +24,7 @@ export class UserService {
       }
       user = this.userRepository.create(data);
       await this.userRepository.save(user);
-      throw new HttpException('Done', HttpStatus.CREATED);
+      throw new HttpException('Created', HttpStatus.CREATED);
     } catch (error) {
       throw error;
     }
