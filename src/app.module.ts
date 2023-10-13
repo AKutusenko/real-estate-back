@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
+      entities: ['dist/**/*.entity{.js,.ts}'],
       synchronize: true,
       autoLoadEntities: true,
     }),
@@ -22,4 +22,4 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
