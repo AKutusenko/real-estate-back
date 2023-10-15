@@ -23,7 +23,11 @@ export class CardService {
 
   async findAll(): Promise<object> {
     try {
-      return await this.cardRepository.find();
+      const data = await this.cardRepository.find();
+      if (!data) {
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+      }
+      return data;
     } catch (error) {
       throw error;
     }

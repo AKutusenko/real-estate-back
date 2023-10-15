@@ -14,7 +14,7 @@ export default class CreateCardDto {
   oneTicketPrice: string;
 
   @IsNotEmpty()
-  yield: string;
+  rate: string;
 
   @IsNotEmpty()
   timeLeft: string;

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body } from '@nestjs/common';
 import { CardService } from './card.service';
 import CreateCardDto from './dto/create-card.dto';
 
-@Controller('/card')
+@Controller('/cards')
 export class CardController {
   constructor(private readonly cardService: CardService) {}
 
