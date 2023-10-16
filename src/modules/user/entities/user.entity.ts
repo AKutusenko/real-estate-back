@@ -1,5 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import * as argon2 from 'argon2';
 
 @Entity('users')
 export default class UserEntity {
@@ -18,12 +25,18 @@ export default class UserEntity {
   @Column()
   password: string;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
   @BeforeInsert()
   async hashPassword(): Promise<void> {
-    this.password = await bcrypt.hash(this.password, 8);
-  }
-
-  async comparePassword(data: string): Promise<boolean> {
-    return await bcrypt.compare(data, this.password);
+    try {
+      this.password = await argon2.hash(this.password);
+    } catch (error) {
+      throw error;
+    }
   }
 }

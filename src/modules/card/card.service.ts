@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { GoneException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import CreateCardDto from './dto/create-card.dto';
+import CreateCardDto from './dto/createCard.dto';
 import CardEntity from './entities/card.entity';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class CardService {
     try {
       const card = this.cardRepository.create(data);
       await this.cardRepository.save(card);
-      throw new HttpException('Created', HttpStatus.CREATED);
+      throw new GoneException('Created');
     } catch (error) {
       throw error;
     }
@@ -25,7 +25,7 @@ export class CardService {
     try {
       const data = await this.cardRepository.find();
       if (!data) {
-        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        throw new NotFoundException('Not found');
       }
       return data;
     } catch (error) {
