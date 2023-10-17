@@ -56,7 +56,7 @@ export class MailService {
         to: email,
         subject: 'Real estate password reset link',
         text: 'Please follow the link to change your password. If you have not initiated a password change, ignore this message.',
-        html: `<h1>Please follow the <a href=${process.env.FRONTEND_BASE_URL}/api/auth/changepassword?email=${cipherEmail}">LINK</a> to change your password. If you have not initiated a password change, ignore this message.</h1>`,
+        html: `<h1>Please follow the <a href=${process.env.FRONTEND_BASE_URL}/api/auth/resetpassword?email=${cipherEmail}">LINK</a> to change your password. If you have not initiated a password change, ignore this message.</h1>`,
       };
 
       await transporter.sendMail(mailOptions);

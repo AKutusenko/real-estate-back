@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from '@nestjs/class-validator';
 
-export default class CreateUserDto {
+export default class UserDto {
   @IsNotEmpty()
   firstName: string;
 
