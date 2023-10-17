@@ -10,7 +10,11 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    try {
+      return await this.authService.login(req.user);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @UseGuards(JwtAuthGuard)

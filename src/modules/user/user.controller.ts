@@ -14,7 +14,11 @@ export class UserController {
 
   @Post('/signup')
   @UsePipes(new ValidationPipe())
-  create(@Body() data: CreateUserDto): Promise<object> {
-    return this.userService.create(data);
+  async create(@Body() data: CreateUserDto): Promise<object> {
+    try {
+      return await this.userService.create(data);
+    } catch (error) {
+      throw error;
+    }
   }
 }

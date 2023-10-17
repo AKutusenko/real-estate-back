@@ -15,12 +15,20 @@ export class CardController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  create(@Body() data: CreateCardDto): Promise<object> {
-    return this.cardService.create(data);
+  async create(@Body() data: CreateCardDto): Promise<object> {
+    try {
+      return await this.cardService.create(data);
+    } catch (error) {
+      throw error;
+    }
   }
 
   @Get()
-  findAll(): Promise<object> {
-    return this.cardService.findAll();
+  async findAll(): Promise<object> {
+    try {
+      return await this.cardService.findAll();
+    } catch (error) {
+      throw error;
+    }
   }
 }
