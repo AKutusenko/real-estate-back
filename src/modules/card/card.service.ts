@@ -1,4 +1,9 @@
-import { GoneException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import CreateCardDto from './dto/createCard.dto';
@@ -15,7 +20,7 @@ export class CardService {
     try {
       const card = this.cardRepository.create(data);
       await this.cardRepository.save(card);
-      throw new GoneException('Created');
+      throw new HttpException('Created', HttpStatus.CREATED);
     } catch (error) {
       throw error;
     }
