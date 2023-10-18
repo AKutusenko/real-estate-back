@@ -3,7 +3,6 @@ import {
   Controller,
   Patch,
   Post,
-  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -12,7 +11,7 @@ import CreateUserDto from './dto/userDto';
 
 @Controller('/auth')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Post('/signup')
   @UsePipes(new ValidationPipe())
@@ -25,12 +24,9 @@ export class UserController {
   }
 
   @Patch('/resetpassword')
-  async resetPassword(
-    @Body() UserDTO: CreateUserDto,
-    @Query('email') email: string,
-  ): Promise<void> {
+  async resetPassword(@Body() UserDTO: CreateUserDto): Promise<void> {
     try {
-      const user = await this.userService.findByEmail(email);
+      const user = await this.userService.findByEmail(UserDTO);
       await this.userService.changePassword(user.id, UserDTO);
     } catch (error) {
       throw error;

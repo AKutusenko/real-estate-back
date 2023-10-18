@@ -12,6 +12,7 @@ import CreateUserDto from './dto/userDto';
 import { JwtService } from '@nestjs/jwt';
 import * as Crypto from 'crypto-js';
 import * as argon2 from 'argon2';
+import { ResetPasswordDto } from './dto/resetPassword.dto';
 
 @Injectable()
 export class UserService {
@@ -52,10 +53,10 @@ export class UserService {
     }
   }
 
-  async findByEmail(email: string): Promise<UserEntity> {
+  async findByEmail(data: ResetPasswordDto): Promise<UserEntity> {
     try {
       const originalEmail = Crypto.AES.decrypt(
-        email,
+        data.email,
         process.env.DECRYPT_KEY,
       ).toString(Crypto.enc.Utf8);
 
