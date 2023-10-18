@@ -55,7 +55,7 @@ export class UserService {
 
   async findByEmail(data: ResetPasswordDto): Promise<UserEntity> {
     try {
-      const originalEmail = Crypto.AES.decrypt(
+      const originalEmail = Crypto.DES.decrypt(
         data.email,
         process.env.DECRYPT_KEY,
       ).toString(Crypto.enc.Utf8);

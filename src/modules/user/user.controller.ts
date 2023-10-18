@@ -11,7 +11,7 @@ import CreateUserDto from './dto/userDto';
 
 @Controller('/auth')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Post('/signup')
   @UsePipes(new ValidationPipe())

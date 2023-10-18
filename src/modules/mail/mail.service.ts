@@ -38,10 +38,11 @@ export class MailService {
     try {
       await this.findByEmail(email);
 
-      const cipherEmail = Crypto.AES.encrypt(
+      const cipherEmail = Crypto.DES.encrypt(
         email,
         process.env.DECRYPT_KEY,
       ).toString();
+
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
